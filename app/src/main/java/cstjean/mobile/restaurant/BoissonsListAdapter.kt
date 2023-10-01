@@ -24,9 +24,13 @@ class TravailHolder(private val binding: ListItemTravailBinding) :
      * @param boisson Le travail associé.
      */
     fun bind(boisson: Boisson) {
-        binding.travailNom.text = boisson.nom
-        binding.travailDate.text = boisson.dateRemise.toString()
-        binding.travailTermine.visibility = if (boisson.estTermine) View.VISIBLE else View.GONE
+        binding.boissonNom.text = boisson.nom
+        binding.boinssonTypeProduit.text = boisson.typeProduit.nom
+        binding.boissonPaysOrigine.text = boisson.paysOrigin
+        binding.boissonProducteur.text = boisson.producteur
+        binding.boissonPhoto.text = boisson.photoFilename
+
+        binding.boissonPhoto.visibility = if (boisson.photoFilename == null) View.GONE else View.VISIBLE
 
         binding.root.setOnClickListener {
             Toast.makeText(binding.root.context, boisson.nom, Toast.LENGTH_SHORT)

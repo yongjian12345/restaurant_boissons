@@ -8,34 +8,58 @@
     android:layout_margin="16dp">
 
     <TextView
-        android:id="@+id/travail_nom"
+        android:id="@+id/boisson_nom"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/travail_termine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="NOM" />
 
     <TextView
-        android:id="@+id/travail_date"
+        android:id="@+id/boinsson_type_produit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/travail_nom"
-        app:layout_constraintStart_toStartOf="@+id/travail_nom"
-        app:layout_constraintTop_toBottomOf="@+id/travail_nom"
-        tools:text="DATE" />
+        app:layout_constraintEnd_toEndOf="@+id/boisson_nom"
+        app:layout_constraintStart_toStartOf="@+id/boisson_nom"
+        app:layout_constraintTop_toBottomOf="@+id/boisson_nom"
+        tools:text="Type" />
 
-    <ImageView
-        android:id="@+id/travail_termine"
+    <TextView
+        android:id="@+id/boisson_pays_origine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="5dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/boisson_producteur"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_done_24"
-        android:contentDescription="@string/travail_termine_description" />
+        tools:text="Pays d'origine"/>
+
+    <TextView
+        android:id="@+id/boisson_producteur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/boisson_pays_origine"
+        tools:text="Producteur"/>
+
+    <TextView
+        android:id="@+id/boisson_Photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boinsson_type_produit"
+        tools:text="Producteur" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

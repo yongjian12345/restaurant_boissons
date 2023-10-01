@@ -33,7 +33,9 @@ class BoissonFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        boisson = Boisson(UUID.randomUUID(), "Travail 1", Date(),false)
+        boisson = Boisson(UUID.randomUUID(),
+            "Boisson 1", Produit.Aperitif,
+            "Canada", "producteur")
     }
 
     /**
@@ -64,6 +66,7 @@ class BoissonFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
+            /*
             travailNom.doOnTextChanged { text, _, _, _ ->
                 boisson = boisson.copy(nom = text.toString())
             }
@@ -75,7 +78,7 @@ class BoissonFragment : Fragment() {
             travailDate.apply {
                 text = boisson.dateRemise.toString()
                 isEnabled = false
-            }
+            }*/
         }
     }
 

@@ -21,8 +21,10 @@ class BoissonsListViewModel : ViewModel() {
             boissons += Boisson(
                 UUID.randomUUID(),
                 "Boisson #$i",
-                Date(),
-                i % 2 == 0
+                Produit.values().random(),
+                "Canada",
+                "producteur",
+                "photo"
             )
         }
     }

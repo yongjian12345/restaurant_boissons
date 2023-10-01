@@ -12,7 +12,7 @@
         android:text="@string/travail_nom_label" />
 
     <EditText
-        android:id="@+id/travail_nom"
+        android:id="@+id/boisson_nom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/travail_nom_hint"

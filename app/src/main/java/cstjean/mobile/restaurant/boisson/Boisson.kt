@@ -1,5 +1,6 @@
 package cstjean.mobile.restaurant.boisson
 
+import cstjean.mobile.restaurant.Produit
 import java.util.Date
 import java.util.UUID
 
@@ -16,5 +17,7 @@ import java.util.UUID
 data class Boisson(
     val id: UUID,
     val nom: String,
-    val dateRemise: Date,
-    val estTermine: Boolean)
+    val typeProduit: Produit,
+    val paysOrigin: String,
+    val producteur: String,
+    var photoFilename: String? = null)
