@@ -1,4 +1,4 @@
-package cstjean.mobile.ecole.boisson
+package cstjean.mobile.restaurant.boisson
 
 import java.util.Date
 import java.util.UUID

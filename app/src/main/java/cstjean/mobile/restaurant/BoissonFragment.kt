@@ -1,4 +1,4 @@
-package cstjean.mobile.ecole
+package cstjean.mobile.restaurant
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import cstjean.mobile.ecole.databinding.FragmentTravailBinding
-import cstjean.mobile.ecole.boisson.Boisson
+import cstjean.mobile.restaurant.databinding.FragmentTravailBinding
+import cstjean.mobile.restaurant.boisson.Boisson
 import java.util.Date
 import java.util.UUID
 

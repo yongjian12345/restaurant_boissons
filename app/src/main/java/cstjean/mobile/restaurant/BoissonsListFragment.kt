@@ -1,4 +1,4 @@
-package cstjean.mobile.ecole
+package cstjean.mobile.restaurant
 
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import cstjean.mobile.ecole.databinding.FragmentTravauxListBinding
+import cstjean.mobile.restaurant.databinding.FragmentTravauxListBinding
 
 private const val TAG = "TravauxListFragment"
 

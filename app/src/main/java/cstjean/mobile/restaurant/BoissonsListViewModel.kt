@@ -1,7 +1,7 @@
-package cstjean.mobile.ecole
+package cstjean.mobile.restaurant
 
 import androidx.lifecycle.ViewModel
-import cstjean.mobile.ecole.boisson.Boisson
+import cstjean.mobile.restaurant.boisson.Boisson
 import java.util.Date
 import java.util.UUID
 

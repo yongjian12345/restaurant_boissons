@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "cstjean.mobile.ecole"
+    namespace = "cstjean.mobile.restaurant"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "cstjean.mobile.ecole"
+        applicationId = "cstjean.mobile.restaurant"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

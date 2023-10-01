@@ -1,4 +1,4 @@
-package cstjean.mobile.ecole
+package cstjean.mobile.restaurant
 
 import org.junit.Test
 

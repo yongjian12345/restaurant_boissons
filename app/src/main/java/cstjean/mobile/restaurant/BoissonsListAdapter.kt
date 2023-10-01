@@ -1,12 +1,12 @@
-package cstjean.mobile.ecole
+package cstjean.mobile.restaurant
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import cstjean.mobile.ecole.databinding.ListItemTravailBinding
-import cstjean.mobile.ecole.boisson.Boisson
+import cstjean.mobile.restaurant.databinding.ListItemTravailBinding
+import cstjean.mobile.restaurant.boisson.Boisson
 
 /**
  * ViewHolder pour notre RecyclerView de travaux.
