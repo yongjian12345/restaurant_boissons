@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import cstjean.mobile.ecole.databinding.FragmentTravailBinding
-import cstjean.mobile.ecole.travail.Travail
+import cstjean.mobile.ecole.boisson.Boisson
 import java.util.Date
 import java.util.UUID
 
@@ -16,14 +16,14 @@ import java.util.UUID
  *
  * @author Gabriel T. St-Hilaire
  */
-class TravailFragment : Fragment() {
+class BoissonFragment : Fragment() {
     private var _binding: FragmentTravailBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
             "Binding est null. La vue est visible ??"
         }
 
-    private lateinit var travail: Travail
+    private lateinit var boisson: Boisson
 
     /**
      * Initialisation du Fragment.
@@ -33,7 +33,7 @@ class TravailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        travail = Travail(UUID.randomUUID(), "Travail 1", Date(),false)
+        boisson = Boisson(UUID.randomUUID(), "Travail 1", Date(),false)
     }
 
     /**
@@ -65,15 +65,15 @@ class TravailFragment : Fragment() {
 
         binding.apply {
             travailNom.doOnTextChanged { text, _, _, _ ->
-                travail = travail.copy(nom = text.toString())
+                boisson = boisson.copy(nom = text.toString())
             }
 
             travailTermine.setOnCheckedChangeListener { _, isChecked ->
-                travail = travail.copy(estTermine = isChecked)
+                boisson = boisson.copy(estTermine = isChecked)
             }
 
             travailDate.apply {
-                text = travail.dateRemise.toString()
+                text = boisson.dateRemise.toString()
                 isEnabled = false
             }
         }

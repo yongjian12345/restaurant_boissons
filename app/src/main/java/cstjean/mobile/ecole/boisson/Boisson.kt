@@ -1,4 +1,4 @@
-package cstjean.mobile.ecole.travail
+package cstjean.mobile.ecole.boisson
 
 import java.util.Date
 import java.util.UUID
@@ -13,4 +13,8 @@ import java.util.UUID
  *
  * @author Gabriel T. St-Hilaire
  */
-data class Travail(val id: UUID, val nom: String, val dateRemise: Date, val estTermine: Boolean)
+data class Boisson(
+    val id: UUID,
+    val nom: String,
+    val dateRemise: Date,
+    val estTermine: Boolean)

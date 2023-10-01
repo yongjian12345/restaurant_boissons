@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ecole</string>
+    <string name="app_name">Restaurant</string>
     <string name="travail_nom_hint">Entrez le nom du travail</string>
     <string name="travail_nom_label">Nom</string>
     <string name="travail_details_label">Détails</string>

@@ -17,14 +17,14 @@ private const val TAG = "TravauxListFragment"
  *
  * @author Gabriel T. St-Hilaire
  */
-class TravauxListFragment : Fragment() {
+class BoissonsListFragment : Fragment() {
     private var _binding: FragmentTravauxListBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
             "Binding est null. La vue est visible ??"
         }
 
-    private val travauxListViewModel: TravauxListViewModel by viewModels()
+    private val boissonsListViewModel: BoissonsListViewModel by viewModels()
 
     /**
      * Initialisation du Fragment.
@@ -33,7 +33,7 @@ class TravauxListFragment : Fragment() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "Travaux : ${travauxListViewModel.travaux.size}")
+        Log.d(TAG, "Boissons : ${boissonsListViewModel.boissons.size}")
     }
 
     /**
@@ -54,8 +54,8 @@ class TravauxListFragment : Fragment() {
 
         binding.travauxRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        val travaux = travauxListViewModel.travaux
-        val adapter = TravauxListAdapter(travaux)
+        val boissons = boissonsListViewModel.boissons
+        val adapter = TravauxListAdapter(boissons)
         binding.travauxRecyclerView.adapter = adapter
 
         return binding.root

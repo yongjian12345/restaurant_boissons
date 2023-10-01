@@ -1,26 +1,26 @@
 package cstjean.mobile.ecole
 
 import androidx.lifecycle.ViewModel
-import cstjean.mobile.ecole.travail.Travail
+import cstjean.mobile.ecole.boisson.Boisson
 import java.util.Date
 import java.util.UUID
 
 /**
  * ViewModel pour la liste des travaux.
  *
- * @property travaux La liste des travaux.
+ * @property boissons La liste des travaux.
  *
  * @author Gabriel T. St-Hilaire
  */
-class TravauxListViewModel : ViewModel() {
-    val travaux = mutableListOf<Travail>()
+class BoissonsListViewModel : ViewModel() {
+    val boissons = mutableListOf<Boisson>()
 
     init {
         // Données de tests
         for (i in 0 until 100) {
-            travaux += Travail(
+            boissons += Boisson(
                 UUID.randomUUID(),
-                "Travail #$i",
+                "Boisson #$i",
                 Date(),
                 i % 2 == 0
             )

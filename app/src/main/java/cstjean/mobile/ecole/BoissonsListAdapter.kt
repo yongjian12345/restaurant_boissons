@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import cstjean.mobile.ecole.databinding.ListItemTravailBinding
-import cstjean.mobile.ecole.travail.Travail
+import cstjean.mobile.ecole.boisson.Boisson
 
 /**
  * ViewHolder pour notre RecyclerView de travaux.
@@ -21,15 +21,15 @@ class TravailHolder(private val binding: ListItemTravailBinding) :
     /**
      * On associe un travail à ce ViewHolder.
      *
-     * @param travail Le travail associé.
+     * @param boisson Le travail associé.
      */
-    fun bind(travail: Travail) {
-        binding.travailNom.text = travail.nom
-        binding.travailDate.text = travail.dateRemise.toString()
-        binding.travailTermine.visibility = if (travail.estTermine) View.VISIBLE else View.GONE
+    fun bind(boisson: Boisson) {
+        binding.travailNom.text = boisson.nom
+        binding.travailDate.text = boisson.dateRemise.toString()
+        binding.travailTermine.visibility = if (boisson.estTermine) View.VISIBLE else View.GONE
 
         binding.root.setOnClickListener {
-            Toast.makeText(binding.root.context, travail.nom, Toast.LENGTH_SHORT)
+            Toast.makeText(binding.root.context, boisson.nom, Toast.LENGTH_SHORT)
                 .show()
         }
     }
@@ -38,11 +38,11 @@ class TravailHolder(private val binding: ListItemTravailBinding) :
 /**
  * Adapter pour notre RecyclerView de travaux.
  *
- * @property travaux Liste des travaux à afficher.
+ * @property boissons Liste des travaux à afficher.
  *
  * @author Gabriel T. St-Hilaire
  */
-class TravauxListAdapter(private val travaux: List<Travail>) :
+class TravauxListAdapter(private val boissons: List<Boisson>) :
     RecyclerView.Adapter<TravailHolder>() {
 
     /**
@@ -67,8 +67,8 @@ class TravauxListAdapter(private val travaux: List<Travail>) :
      * @param position La position dans la liste qu'on souhaite utiliser.
      */
     override fun onBindViewHolder(holder: TravailHolder, position: Int) {
-        val travail = travaux[position]
-        holder.bind(travail)
+        val boisson = boissons[position]
+        holder.bind(boisson)
     }
 
     /**
@@ -76,5 +76,5 @@ class TravauxListAdapter(private val travaux: List<Travail>) :
      *
      * @return Le nombre d'item total de notre liste.
      */
-    override fun getItemCount() = travaux.size
+    override fun getItemCount() = boissons.size
 }
