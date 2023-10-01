@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import cstjean.mobile.restaurant.databinding.FragmentTravailBinding
+import cstjean.mobile.restaurant.databinding.FragmentBoissonBinding
 import cstjean.mobile.restaurant.boisson.Boisson
 import java.util.Date
 import java.util.UUID
@@ -17,7 +17,7 @@ import java.util.UUID
  * @author Gabriel T. St-Hilaire
  */
 class BoissonFragment : Fragment() {
-    private var _binding: FragmentTravailBinding? = null
+    private var _binding: FragmentBoissonBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
             "Binding est null. La vue est visible ??"
@@ -51,7 +51,7 @@ class BoissonFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentTravailBinding.inflate(inflater, container, false)
+        _binding = FragmentBoissonBinding.inflate(inflater, container, false)
 
         return binding.root
     }

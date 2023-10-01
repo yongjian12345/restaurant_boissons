@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import cstjean.mobile.restaurant.databinding.FragmentTravauxListBinding
+import cstjean.mobile.restaurant.databinding.FragmentBoissonsListBinding
 
 private const val TAG = "TravauxListFragment"
 
@@ -18,7 +18,7 @@ private const val TAG = "TravauxListFragment"
  * @author Gabriel T. St-Hilaire
  */
 class BoissonsListFragment : Fragment() {
-    private var _binding: FragmentTravauxListBinding? = null
+    private var _binding: FragmentBoissonsListBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
             "Binding est null. La vue est visible ??"
@@ -50,7 +50,7 @@ class BoissonsListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTravauxListBinding.inflate(inflater, container, false)
+        _binding = FragmentBoissonsListBinding.inflate(inflater, container, false)
 
         binding.travauxRecyclerView.layoutManager = LinearLayoutManager(context)
 
