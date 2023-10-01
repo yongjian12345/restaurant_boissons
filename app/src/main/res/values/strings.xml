@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ecole</string>
+    <string name="travail_nom_hint">Entrez le nom du travail</string>
+    <string name="travail_nom_label">Nom</string>
+    <string name="travail_details_label">Détails</string>
+    <string name="travail_termine_label">Terminé</string>
+    <string name="travail_termine_description">Travail terminé</string>
+</resources>
