@@ -13,9 +13,10 @@ import java.util.UUID
  * @author Gabriel T. St-Hilaire
  */
 class BoissonsListViewModel : ViewModel() {
-    val boissons = mutableListOf<Boisson>()
+    private val boissonRepository = BoissonRepository.get()
+    val boissons = boissonRepository.getBoissons()
 
-    init {
+   /* init {
         // Données de tests
         for (i in 0 until 100) {
             boissons += Boisson(
@@ -27,5 +28,5 @@ class BoissonsListViewModel : ViewModel() {
                 "photo"
             )
         }
-    }
+    }*/
 }

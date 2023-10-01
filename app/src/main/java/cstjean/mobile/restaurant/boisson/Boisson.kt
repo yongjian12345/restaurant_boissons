@@ -1,5 +1,7 @@
 package cstjean.mobile.restaurant.boisson
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import cstjean.mobile.restaurant.Produit
 import java.util.Date
 import java.util.UUID
@@ -14,8 +16,9 @@ import java.util.UUID
  *
  * @author Gabriel T. St-Hilaire
  */
+@Entity
 data class Boisson(
-    val id: UUID,
+    @PrimaryKey val id: UUID,
     val nom: String,
     val typeProduit: Produit,
     val paysOrigin: String,
