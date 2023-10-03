@@ -9,6 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import cstjean.mobile.restaurant.databinding.FragmentBoissonsListBinding
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.launch
 
 private const val TAG = "TravauxListFragment"
 
@@ -26,15 +30,6 @@ class BoissonsListFragment : Fragment() {
 
     private val boissonsListViewModel: BoissonsListViewModel by viewModels()
 
-    /**
-     * Initialisation du Fragment.
-     *
-     * @param savedInstanceState Les données conservées au changement d'état.
-     */
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d(TAG, "Boissons : ${boissonsListViewModel.boissons.size}")
-    }
 
     /**
      * Instanciation de l'interface.
@@ -52,13 +47,20 @@ class BoissonsListFragment : Fragment() {
     ): View {
         _binding = FragmentBoissonsListBinding.inflate(inflater, container, false)
 
-        binding.travauxRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.boissonsRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        val boissons = boissonsListViewModel.boissons
-        val adapter = TravauxListAdapter(boissons)
-        binding.travauxRecyclerView.adapter = adapter
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                val travaux = boissonsListViewModel.loadBoissons()
+                binding.boissonsRecyclerView.adapter = TravauxListAdapter(travaux)
+            }
+        }
     }
 
     /**
