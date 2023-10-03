@@ -15,7 +15,7 @@ import cstjean.mobile.restaurant.boisson.Boisson
  *
  * @author Gabriel T. St-Hilaire
  */
-class TravailHolder(private val binding: ListItemBoissonBinding) :
+class BoissonHolder(private val binding: ListItemBoissonBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     /**
@@ -46,8 +46,8 @@ class TravailHolder(private val binding: ListItemBoissonBinding) :
  *
  * @author Gabriel T. St-Hilaire
  */
-class TravauxListAdapter(private val boissons: List<Boisson>) :
-    RecyclerView.Adapter<TravailHolder>() {
+class BoissonsListAdapter(private val boissons: List<Boisson>) :
+    RecyclerView.Adapter<BoissonHolder>() {
 
     /**
      * Lors de la création des ViewHolder.
@@ -58,10 +58,10 @@ class TravauxListAdapter(private val boissons: List<Boisson>) :
      *
      * @return Un ViewHolder pour notre cellule.
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravailHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoissonHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ListItemBoissonBinding.inflate(inflater, parent, false)
-        return TravailHolder(binding)
+        return BoissonHolder(binding)
     }
 
     /**
@@ -70,7 +70,7 @@ class TravauxListAdapter(private val boissons: List<Boisson>) :
      * @param holder Le ViewHolder à utiliser.
      * @param position La position dans la liste qu'on souhaite utiliser.
      */
-    override fun onBindViewHolder(holder: TravailHolder, position: Int) {
+    override fun onBindViewHolder(holder: BoissonHolder, position: Int) {
         val boisson = boissons[position]
         holder.bind(boisson)
     }

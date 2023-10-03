@@ -31,11 +31,11 @@ class BoissonsListViewModel : ViewModel() {
     }
 
     suspend fun loadBoissons(): List<Boisson> {
-        val travaux = mutableListOf<Boisson>()
+        val boissons = mutableListOf<Boisson>()
         delay(5000)
 // Données de tests
         for (i in 0 until 100) {
-            travaux += Boisson(
+            boissons += Boisson(
                 UUID.randomUUID(),
                 "Travail #$i",
                 Produit.Biere,
@@ -43,7 +43,7 @@ class BoissonsListViewModel : ViewModel() {
                 "Molson",
             )
         }
-        return travaux
+        return boissons
 
     }
 }

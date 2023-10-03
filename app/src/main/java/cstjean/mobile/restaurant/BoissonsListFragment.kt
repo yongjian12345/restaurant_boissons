@@ -1,7 +1,6 @@
 package cstjean.mobile.restaurant
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.launch
 
-private const val TAG = "TravauxListFragment"
+private const val TAG = "BoissonsListFragment"
 
 /**
  * Fragment pour la liste des travaux.
@@ -57,8 +56,8 @@ class BoissonsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                val travaux = boissonsListViewModel.loadBoissons()
-                binding.boissonsRecyclerView.adapter = TravauxListAdapter(travaux)
+                val boissons = boissonsListViewModel.loadBoissons()
+                binding.boissonsRecyclerView.adapter = BoissonsListAdapter(boissons)
             }
         }
     }
