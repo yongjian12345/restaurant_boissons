@@ -47,6 +47,8 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:2.5.2")
     ksp("androidx.room:room-compiler:2.5.2")
 
+    implementation("androidx.room:room-ktx:2.5.2")
+
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")

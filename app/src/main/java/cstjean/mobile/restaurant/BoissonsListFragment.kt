@@ -56,8 +56,9 @@ class BoissonsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                val boissons = boissonsListViewModel.loadBoissons()
-                binding.boissonsRecyclerView.adapter = BoissonsListAdapter(boissons)
+                boissonsListViewModel.boissons.collect { boissons ->
+                    binding.boissonsRecyclerView.adapter = BoissonsListAdapter(boissons)
+                }
             }
         }
     }

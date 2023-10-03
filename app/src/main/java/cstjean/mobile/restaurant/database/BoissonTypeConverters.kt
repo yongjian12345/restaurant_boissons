@@ -9,7 +9,7 @@ class BoissonTypeConverters {
         return produit.nom
     }
     @TypeConverter
-    fun fromTypeProduitE(milisSinceEpoch: String): Produit {
-        return Produit.valueOf(milisSinceEpoch)
+    fun fromTypeProduitE(milisSinceEpoch: String): Produit? {
+        return Produit.fromNom(milisSinceEpoch)
     }
 }

@@ -5,6 +5,7 @@ import androidx.room.Room
 import cstjean.mobile.restaurant.database.BoissonDatabase
 import cstjean.mobile.restaurant.boisson.Boisson
 import java.util.UUID
+import kotlinx.coroutines.flow.Flow
 
 private const val DATABASE_NAME = "boisson-database"
 class BoissonRepository private constructor(context: Context){
@@ -15,8 +16,12 @@ class BoissonRepository private constructor(context: Context){
             DATABASE_NAME
         ).build()
 
-    fun getBoissons(): List<Boisson> = database.boissonDao().getBoissons()
-    fun getBoisson(id: UUID): Boisson = database.boissonDao().getBoisson(id)
+    fun getBoissons(): Flow<List<Boisson>> = database.boissonDao().getBoissons()
+    suspend fun getBoisson(id: UUID): Boisson = database.boissonDao().getBoisson(id)
+
+    suspend fun addBoisson(boisson: Boisson) {
+        database.boissonDao().addBoisson(boisson)
+    }
 
     companion object {
         private var INSTANCE: BoissonRepository? = null

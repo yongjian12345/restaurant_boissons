@@ -6,7 +6,8 @@ import androidx.lifecycle.viewModelScope
 import cstjean.mobile.restaurant.boisson.Boisson
 import java.util.Date
 import java.util.UUID
-
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -20,30 +21,34 @@ private const val TAG = "BoissonsListViewModel"
  * @author Gabriel T. St-Hilaire
  */
 class BoissonsListViewModel : ViewModel() {
-    val boissons = mutableListOf<Boisson>()
+    private val boissonRepository = BoissonRepository.get()
+    private val _boissons: MutableStateFlow<List<Boisson>> = MutableStateFlow(emptyList())
+    val boissons: StateFlow<List<Boisson>> = _boissons
 
     init {
         viewModelScope.launch {
-            Log.d(TAG, "Coroutine launched")
-            boissons += loadBoissons()
-            Log.d(TAG, "Coroutine finished")
+            boissonRepository.getBoissons().collect {
+                _boissons.value = it
+            }
         }
     }
 
-    suspend fun loadBoissons(): List<Boisson> {
-        val boissons = mutableListOf<Boisson>()
-        delay(5000)
+    suspend fun loadBoissons() {
 // Données de tests
+
         for (i in 0 until 100) {
-            boissons += Boisson(
+            val boissons = Boisson(
                 UUID.randomUUID(),
                 "Travail #$i",
                 Produit.Biere,
                 "Canada",
                 "Molson",
             )
+            addBoisson(boissons);
         }
-        return boissons
+    }
 
+    suspend fun addBoisson(boissons: Boisson) {
+        boissonRepository.addBoisson(boissons)
     }
 }
