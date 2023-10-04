@@ -3,8 +3,13 @@ package cstjean.mobile.restaurant
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +18,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import cstjean.mobile.restaurant.boisson.Boisson
 import kotlinx.coroutines.launch
+import java.util.UUID
 
 private const val TAG = "BoissonsListFragment"
 
@@ -66,6 +73,37 @@ class BoissonsListFragment : Fragment() {
                 }
             }
         }
+
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.fragment_boissons_list, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.nouveau_travail -> {
+                        viewLifecycleOwner.lifecycleScope.launch {
+                            val nouvelleBoisson = Boisson(
+                                UUID.randomUUID(),
+                                "boisson",
+                                Produit.Vin,
+                                "Canada",
+                                "Moi",
+                                null
+                            )
+                            boissonsListViewModel.addBoisson(nouvelleBoisson)
+                            findNavController().navigate(
+                                BoissonsListFragmentDirections.showBoissonDetail(nouvelleBoisson.id)
+                            )
+                        }
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     /**
