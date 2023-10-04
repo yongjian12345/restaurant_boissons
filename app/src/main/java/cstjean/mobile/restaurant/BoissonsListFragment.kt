@@ -1,6 +1,7 @@
 package cstjean.mobile.restaurant
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import cstjean.mobile.restaurant.databinding.FragmentBoissonsListBinding
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 
 private const val TAG = "BoissonsListFragment"
@@ -57,7 +59,10 @@ class BoissonsListFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 boissonsListViewModel.boissons.collect { boissons ->
-                    binding.boissonsRecyclerView.adapter = BoissonsListAdapter(boissons)
+                    binding.boissonsRecyclerView.adapter = BoissonsListAdapter(boissons){ boissonId ->
+                        Log.d(TAG, boissonId.toString())
+                        findNavController().navigate()
+                    }
                 }
             }
         }

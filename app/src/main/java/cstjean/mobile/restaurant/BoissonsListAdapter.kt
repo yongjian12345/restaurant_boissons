@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import cstjean.mobile.restaurant.databinding.ListItemBoissonBinding
 import cstjean.mobile.restaurant.boisson.Boisson
+import java.util.UUID
 
 /**
  * ViewHolder pour notre RecyclerView de travaux.
@@ -23,7 +24,7 @@ class BoissonHolder(private val binding: ListItemBoissonBinding) :
      *
      * @param boisson Le travail associé.
      */
-    fun bind(boisson: Boisson) {
+    fun bind(boisson: Boisson, onBoissonClicked: (boissonId : UUID) -> Unit) {
         binding.boissonNom.text = boisson.nom
         binding.boinssonTypeProduit.text = boisson.typeProduit.nom
         binding.boissonPaysOrigine.text = boisson.paysOrigin
@@ -33,8 +34,7 @@ class BoissonHolder(private val binding: ListItemBoissonBinding) :
         binding.boissonPhoto.visibility = if (boisson.photoFilename == null) View.GONE else View.VISIBLE
 
         binding.root.setOnClickListener {
-            Toast.makeText(binding.root.context, boisson.nom, Toast.LENGTH_SHORT)
-                .show()
+            onBoissonClicked(boisson.id)
         }
     }
 }
@@ -46,7 +46,9 @@ class BoissonHolder(private val binding: ListItemBoissonBinding) :
  *
  * @author Gabriel T. St-Hilaire
  */
-class BoissonsListAdapter(private val boissons: List<Boisson>) :
+class BoissonsListAdapter(
+    private val boissons: List<Boisson>,
+    private val onBoissonClicked: (boissonId : UUID) -> Unit) :
     RecyclerView.Adapter<BoissonHolder>() {
 
     /**
@@ -72,7 +74,7 @@ class BoissonsListAdapter(private val boissons: List<Boisson>) :
      */
     override fun onBindViewHolder(holder: BoissonHolder, position: Int) {
         val boisson = boissons[position]
-        holder.bind(boisson)
+        holder.bind(boisson, onBoissonClicked)
     }
 
     /**
