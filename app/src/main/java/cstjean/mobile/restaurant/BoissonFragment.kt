@@ -6,8 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.navArgs
 import cstjean.mobile.restaurant.databinding.FragmentBoissonBinding
 import cstjean.mobile.restaurant.boisson.Boisson
+import kotlinx.coroutines.launch
 import java.util.Date
 import java.util.UUID
 
@@ -23,20 +29,11 @@ class BoissonFragment : Fragment() {
             "Binding est null. La vue est visible ??"
         }
 
-    private lateinit var boisson: Boisson
-
-    /**
-     * Initialisation du Fragment.
-     *
-     * @param savedInstanceState Les données conservées au changement d'état.
-     */
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        boisson = Boisson(UUID.randomUUID(),
-            "Boisson 1", Produit.Aperitif,
-            "Canada", "producteur")
+    private val args: BoissonFragmentArgs by navArgs()
+    private val boissonViewModel: BoissonViewModel by viewModels() {
+        BoissonViewModelFactory(args.boissonId)
     }
+
 
     /**
      * Instanciation de l'interface.
@@ -65,20 +62,69 @@ class BoissonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                boissonViewModel.boisson.collect { boisson ->
+                    boisson?.let { updateUi(it) }
+                }
+            }
+        }
         binding.apply {
-            /*
-            travailNom.doOnTextChanged { text, _, _, _ ->
-                boisson = boisson.copy(nom = text.toString())
+
+            boissonNom.doOnTextChanged { text, _, _, _ ->
+                boissonViewModel.updateBoisson { oldBoisson ->
+                    oldBoisson.copy(nom = text.toString())
+                }
             }
 
-            travailTermine.setOnCheckedChangeListener { _, isChecked ->
-                boisson = boisson.copy(estTermine = isChecked)
+             boissonType.doOnTextChanged { text, _, _, _ ->
+                boissonViewModel.updateBoisson { boissonType ->
+                    boissonType.copy(typeProduit = Produit.fromNom(boissonType.toString()))
+                }
             }
 
-            travailDate.apply {
-                text = boisson.dateRemise.toString()
-                isEnabled = false
-            }*/
+            boissonPays.doOnTextChanged { text, _, _, _ ->
+                boissonViewModel.updateBoisson { oldBoisson ->
+                    oldBoisson.copy(paysOrigin = text.toString())
+                }
+            }
+
+            boissonProducteur.doOnTextChanged { text, _, _, _ ->
+                boissonViewModel.updateBoisson { oldBoisson ->
+                    oldBoisson.copy(producteur = text.toString())
+                }
+            }
+
+            boissonImage.doOnTextChanged { text, _, _, _ ->
+                boissonViewModel.updateBoisson { oldBoisson ->
+                    oldBoisson.copy(photoFilename = text.toString())
+                }
+            }
+
+        }
+    }
+
+    private fun updateUi(boisson: Boisson) {
+        binding.apply {
+// Pour éviter une loop infinie avec le update
+            if (boissonNom.text.toString() != boisson.nom) {
+                boissonNom.setText(boisson.nom)
+            }
+            if (boissonType.text.toString() != boisson.typeProduit.toString()) {
+                boissonType.setText(boisson.typeProduit.nom)
+            }
+            if (boissonPays.text.toString() != boisson.paysOrigin) {
+                boissonPays.setText(boisson.paysOrigin)
+            }
+            if (boissonProducteur.text.toString() != boisson.producteur) {
+                boissonProducteur.setText(boisson.producteur)
+            }
+            if (boissonImage.text.toString() != boisson.photoFilename) {
+                boissonImage.setText(boisson.photoFilename)
+            }
+
+
+
         }
     }
 

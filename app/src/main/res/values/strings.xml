@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Restaurant</string>
-    <string name="travail_nom_hint">Entrez le nom du travail</string>
-    <string name="travail_nom_label">Nom</string>
-    <string name="travail_details_label">Détails</string>
-    <string name="travail_termine_label">Terminé</string>
-    <string name="travail_termine_description">Travail terminé</string>
+    <string name="boisson_nom_hint">Entrez le nom de la boisson</string>
+    <string name="boisson_type_hint">Entrez le type de la boisson</string>
+    <string name="boisson_pays_hint">Entrez le pays d\'orgine de la boisson</string>
+    <string name="boisson_producteur_hint">Entrez le producteur de la boisson</string>
+    <string name="boisson_image_hint">Entrez l\'image de la boisson</string>
+    <string name="boisson_nom_label">Nom</string>
+    <string name="boisson_type_label">Type</string>
+    <string name="boisson_pays_label">Pays Origine</string>
+    <string name="boisson_producteur_label">Producteur</string>
+    <string name="boisson_image_label">Image</string>
 </resources>

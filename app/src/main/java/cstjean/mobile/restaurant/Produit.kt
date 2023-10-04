@@ -8,13 +8,13 @@ enum class Produit ( val nom: String){
     Autre( "Autre");
 
     companion object {
-        fun fromNom(nom: String): Produit? {
+        fun fromNom(nom: String): Produit {
             for (value in values()) {
                 if (value.nom == nom) {
                     return value
                 }
             }
-            return null
+            return Autre
         }
     }
 }

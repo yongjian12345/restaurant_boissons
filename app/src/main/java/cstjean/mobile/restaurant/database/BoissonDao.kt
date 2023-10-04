@@ -5,6 +5,7 @@ import androidx.room.Query
 import cstjean.mobile.restaurant.boisson.Boisson
 import java.util.UUID
 import androidx.room.Insert
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -16,4 +17,7 @@ interface BoissonDao {
 
     @Insert
     suspend fun addBoisson(boisson: Boisson)
+
+    @Update
+    suspend fun updateBoisson(boisson: Boisson)
 }
