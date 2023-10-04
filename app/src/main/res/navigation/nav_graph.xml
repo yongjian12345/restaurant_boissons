@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/boissonsListFragment"
         android:name="cstjean.mobile.restaurant.BoissonsListFragment"
-        android:label="TravauxListFragment"
+        android:label="BoissonsListFragment"
         tools:layout="@layout/fragment_boissons_list">
         <action
             android:id="@+id/show_boisson_detail"

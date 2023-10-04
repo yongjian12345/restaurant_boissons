@@ -61,7 +61,7 @@ class BoissonsListFragment : Fragment() {
                 boissonsListViewModel.boissons.collect { boissons ->
                     binding.boissonsRecyclerView.adapter = BoissonsListAdapter(boissons){ boissonId ->
                         Log.d(TAG, boissonId.toString())
-                        findNavController().navigate()
+                        findNavController().navigate(BoissonsListFragmentDirections.showBoissonDetail(boissonId))
                     }
                 }
             }
