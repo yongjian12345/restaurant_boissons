@@ -11,4 +11,5 @@
     <string name="boisson_pays_label">Pays Origine</string>
     <string name="boisson_producteur_label">Producteur</string>
     <string name="boisson_image_label">Image</string>
+    <string name="boisson_ajouter_image">Ajouter une image</string>
 </resources>

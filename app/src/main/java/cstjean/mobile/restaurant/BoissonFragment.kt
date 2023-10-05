@@ -1,9 +1,15 @@
 package cstjean.mobile.restaurant
 
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
+import androidx.core.view.doOnLayout
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,6 +20,7 @@ import androidx.navigation.fragment.navArgs
 import cstjean.mobile.restaurant.databinding.FragmentBoissonBinding
 import cstjean.mobile.restaurant.boisson.Boisson
 import kotlinx.coroutines.launch
+import java.io.File
 import java.util.Date
 import java.util.UUID
 
@@ -28,6 +35,21 @@ class BoissonFragment : Fragment() {
         get() = checkNotNull(_binding) {
             "Binding est null. La vue est visible ??"
         }
+
+    private fun canResolveIntent(intent: Intent): Boolean {
+        val packageManager: PackageManager = requireActivity().packageManager
+        return intent.resolveActivity(packageManager) != null
+    }
+
+    private val prendrePhoto =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { photoPrise: Boolean ->
+            if (photoPrise && photoFilename != null) {
+                boissonViewModel.updateBoisson { oldBoisson ->
+                    oldBoisson.copy(photoFilename = photoFilename)
+                }
+            }
+        }
+    private var photoFilename: String? = null
 
     private val args: BoissonFragmentArgs by navArgs()
     private val boissonViewModel: BoissonViewModel by viewModels() {
@@ -71,6 +93,24 @@ class BoissonFragment : Fragment() {
         }
         binding.apply {
 
+            val cameraIntent = prendrePhoto.contract.createIntent(
+                requireContext(),
+                Uri.parse("")
+            )
+// cameraIntent.addCategory(Intent.CATEGORY_APP_CALCULATOR) // Pour tester !
+            boissonCamera.isEnabled = canResolveIntent(cameraIntent)
+
+            boissonCamera.setOnClickListener {
+                photoFilename = "IMG_${Date()}.JPG"
+                val photoFichier = File(requireContext().applicationContext.filesDir, photoFilename)
+                val photoUri = FileProvider.getUriForFile(
+                    requireContext(),
+                    "cstjean.mobile.fileprovider",
+                    photoFichier
+                )
+                prendrePhoto.launch(photoUri)
+            }
+
             boissonNom.doOnTextChanged { text, _, _, _ ->
                 boissonViewModel.updateBoisson { oldBoisson ->
                     oldBoisson.copy(nom = text.toString())
@@ -95,12 +135,35 @@ class BoissonFragment : Fragment() {
                 }
             }
 
+            /*
             boissonImage.doOnTextChanged { text, _, _, _ ->
                 boissonViewModel.updateBoisson { oldBoisson ->
                     oldBoisson.copy(photoFilename = text.toString())
                 }
-            }
+            }*/
 
+        }
+    }
+
+    private fun updatePhoto(photoFilename: String?) {
+        if (binding.boissonPhoto.tag != photoFilename) {
+            val photoFichier = photoFilename?.let {
+                File(requireContext().applicationContext.filesDir, it)
+            }
+            if (photoFichier?.exists() == true) {
+                binding.boissonPhoto.doOnLayout { view ->
+                    val scaledBitmap = getScaledBitmap(
+                        photoFichier.path,
+                        view.width,
+                        view.height
+                    )
+                    binding.boissonPhoto.setImageBitmap(scaledBitmap)
+                    binding.boissonPhoto.tag = photoFilename
+                }
+            } else {
+                binding.boissonPhoto.setImageBitmap(null)
+                binding.boissonPhoto.tag = null
+            }
         }
     }
 
@@ -119,10 +182,11 @@ class BoissonFragment : Fragment() {
             if (boissonProducteur.text.toString() != boisson.producteur) {
                 boissonProducteur.setText(boisson.producteur)
             }
+            /*
             if (boissonImage.text.toString() != boisson.photoFilename) {
                 boissonImage.setText(boisson.photoFilename)
-            }
-
+            }*/
+            updatePhoto(boisson.photoFilename)
 
 
         }
