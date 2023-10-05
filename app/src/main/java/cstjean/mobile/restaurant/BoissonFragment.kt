@@ -45,6 +45,13 @@ class BoissonFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.TakePicture()) { photoPrise: Boolean ->
             if (photoPrise && photoFilename != null) {
                 boissonViewModel.updateBoisson { oldBoisson ->
+                    if (oldBoisson.photoFilename != null) {
+                        val photoFichier = File(
+                            requireContext().applicationContext.filesDir,
+                            oldBoisson.photoFilename
+                        )
+                        photoFichier.delete()
+                    }
                     oldBoisson.copy(photoFilename = photoFilename)
                 }
             }
