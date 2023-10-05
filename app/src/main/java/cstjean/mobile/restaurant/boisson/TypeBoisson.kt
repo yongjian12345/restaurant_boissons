@@ -5,7 +5,7 @@ package cstjean.mobile.restaurant.boisson
  *
  * @author Raphael ostiguy & Yong Jian Qiu
  */
-enum class typeBoisson {
+enum class TypeBoisson {
     VIN,
     SPIRITUEUX,
     APERITIF,

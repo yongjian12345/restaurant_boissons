@@ -1,5 +1,6 @@
 package cstjean.mobile.restaurant
 
+import android.R
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -7,6 +8,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.core.view.doOnLayout
@@ -100,6 +103,25 @@ class BoissonFragment : Fragment() {
         }
         binding.apply {
 
+
+            val items = Produit.values().map { it.toString() }.toTypedArray()
+            val adapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_dropdown_item, items)
+
+            binding.typeBoisson.adapter = adapter
+
+            binding.typeBoisson.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    val selectedType = items[position]
+                    boissonViewModel.updateBoisson { oldCarteFidelite ->
+                        oldCarteFidelite.copy(typeProduit = Produit.valueOf(selectedType))
+                    }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+            }
+
             val cameraIntent = prendrePhoto.contract.createIntent(
                 requireContext(),
                 Uri.parse("")
@@ -121,12 +143,6 @@ class BoissonFragment : Fragment() {
             boissonNom.doOnTextChanged { text, _, _, _ ->
                 boissonViewModel.updateBoisson { oldBoisson ->
                     oldBoisson.copy(nom = text.toString())
-                }
-            }
-
-             boissonType.doOnTextChanged { text, _, _, _ ->
-                boissonViewModel.updateBoisson { boissonType ->
-                    boissonType.copy(typeProduit = Produit.fromNom(boissonType.toString()))
                 }
             }
 
@@ -180,9 +196,7 @@ class BoissonFragment : Fragment() {
             if (boissonNom.text.toString() != boisson.nom) {
                 boissonNom.setText(boisson.nom)
             }
-            if (boissonType.text.toString() != boisson.typeProduit.toString()) {
-                boissonType.setText(boisson.typeProduit.nom)
-            }
+
             if (boissonPays.text.toString() != boisson.paysOrigin) {
                 boissonPays.setText(boisson.paysOrigin)
             }
@@ -195,7 +209,14 @@ class BoissonFragment : Fragment() {
             }*/
             updatePhoto(boisson.photoFilename)
 
+            val items = Produit.values().map { it.toString() }.toTypedArray()
+            val currentTypeProduit = boisson.typeProduit.toString()
 
+            // Trouvez l'index de cet élément dans votre tableau
+            val defaultPosition = items.indexOf(currentTypeProduit)
+
+            // Définissez cet index comme élément sélectionné dans le Spinner
+            typeBoisson.setSelection(defaultPosition)
         }
     }
 

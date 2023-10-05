@@ -25,12 +25,12 @@
         android:layout_height="wrap_content"
         android:text="@string/boisson_type_label" />
 
-    <EditText
-        android:id="@+id/boisson_type"
+    <Spinner
+        android:id="@+id/type_boisson"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/boisson_type_hint"
-        android:inputType="text" />
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp" />
 
     <TextView
         style="?android:listSeparatorTextViewStyle"

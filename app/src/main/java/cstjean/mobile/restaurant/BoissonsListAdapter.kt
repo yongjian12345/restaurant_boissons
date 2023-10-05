@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import cstjean.mobile.restaurant.databinding.ListItemBoissonBinding
 import cstjean.mobile.restaurant.boisson.Boisson
+import cstjean.mobile.restaurant.boisson.TypeBoisson
 import java.util.UUID
 
 /**
@@ -26,12 +27,20 @@ class BoissonHolder(private val binding: ListItemBoissonBinding) :
      */
     fun bind(boisson: Boisson, onBoissonClicked: (boissonId : UUID) -> Unit) {
         binding.boissonNom.text = boisson.nom
-        binding.boinssonTypeProduit.text = boisson.typeProduit.nom
+
         binding.boissonPaysOrigine.text = boisson.paysOrigin
         binding.boissonProducteur.text = boisson.producteur
         binding.boissonPhoto.text = boisson.photoFilename
 
         binding.boissonPhoto.visibility = if (boisson.photoFilename == null) View.GONE else View.VISIBLE
+
+        when (boisson.typeProduit) {
+            Produit.Vin -> binding.typeBoisson.setImageResource(R.drawable.vin)
+            Produit.Spiritueux -> binding.typeBoisson.setImageResource(R.drawable.spiritueux)
+            Produit.Aperitif -> binding.typeBoisson.setImageResource(R.drawable.aperitif)
+            Produit.Biere -> binding.typeBoisson.setImageResource(R.drawable.biere)
+            Produit.Autre -> binding.typeBoisson.setImageResource(R.drawable.autre)
+        }
 
         binding.root.setOnClickListener {
             onBoissonClicked(boisson.id)
