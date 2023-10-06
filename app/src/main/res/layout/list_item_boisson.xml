@@ -18,23 +18,14 @@
         tools:text="NOM" />
 
     <TextView
-        android:id="@+id/boisson_Photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boisson_nom"
-        tools:text="Producteur" />
-
-    <TextView
         android:id="@+id/boisson_pays_origine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toTopOf="@+id/boisson_producteur"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/boisson_photo"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boisson_Photo"
         tools:text="Pays d'origine" />
 
     <TextView
@@ -42,11 +33,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/boisson_photo"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/boisson_pays_origine"
+        app:layout_constraintTop_toBottomOf="@+id/boisson_nom"
         tools:text="Producteur" />
+
 
     <ImageView
         android:id="@+id/type_boisson"
@@ -54,21 +46,25 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boisson_producteur"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.709"
         app:srcCompat="@drawable/autre" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/boisson_photo"
+        android:layout_width="133dp"
+        android:layout_height="132dp"
+        android:cropToPadding="true"
+        android:scaleType="centerInside"
+        android:layout_gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/boisson_pays_origine"
+        app:layout_constraintHorizontal_bias="0.719"
+        app:layout_constraintStart_toEndOf="@+id/boisson_nom"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

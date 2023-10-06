@@ -1,15 +1,17 @@
 package cstjean.mobile.restaurant
 
-import android.R
+import android.R as U
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.core.view.doOnLayout
@@ -25,7 +27,8 @@ import cstjean.mobile.restaurant.boisson.Boisson
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.Date
-import java.util.UUID
+
+
 
 /**
  * Fragment pour la gestion d'un travail.
@@ -105,7 +108,7 @@ class BoissonFragment : Fragment() {
 
 
             val items = Produit.values().map { it.toString() }.toTypedArray()
-            val adapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_dropdown_item, items)
+            val adapter = ArrayAdapter(requireContext(), U.layout.simple_spinner_dropdown_item, items)
 
             binding.typeBoisson.adapter = adapter
 
@@ -126,7 +129,7 @@ class BoissonFragment : Fragment() {
                 requireContext(),
                 Uri.parse("")
             )
-// cameraIntent.addCategory(Intent.CATEGORY_APP_CALCULATOR) // Pour tester !
+            // cameraIntent.addCategory(Intent.CATEGORY_APP_CALCULATOR) // Pour tester !
             boissonCamera.isEnabled = canResolveIntent(cameraIntent)
 
             boissonCamera.setOnClickListener {
@@ -163,7 +166,9 @@ class BoissonFragment : Fragment() {
     }
 
     private fun updatePhoto(photoFilename: String?) {
+
         if (binding.boissonPhoto.tag != photoFilename) {
+
             val photoFichier = photoFilename?.let {
                 File(requireContext().applicationContext.filesDir, it)
             }
@@ -175,18 +180,22 @@ class BoissonFragment : Fragment() {
                         view.height
                     )
                     binding.boissonPhoto.setImageBitmap(scaledBitmap)
+                    binding.boissonPhoto.scaleType = ImageView.ScaleType.FIT_XY
                     binding.boissonPhoto.tag = photoFilename
                 }
-            } else {
-                binding.boissonPhoto.setImageBitmap(null)
-                binding.boissonPhoto.tag = null
             }
+        }
+        else {
+
+            binding.boissonPhoto.setImageResource(R.drawable.photo)
+            binding.boissonPhoto.scaleType = ImageView.ScaleType.FIT_XY
+            binding.boissonPhoto.tag = "default"
         }
     }
 
     private fun updateUi(boisson: Boisson) {
         binding.apply {
-// Pour éviter une loop infinie avec le update
+            // Pour éviter une loop infinie avec le update
             if (boissonNom.text.toString() != boisson.nom) {
                 boissonNom.setText(boisson.nom)
             }
