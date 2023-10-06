@@ -29,6 +29,10 @@ class BoissonRepository private constructor(
         database.boissonDao().addBoisson(boisson)
     }
 
+    suspend fun deleteBoisson(boisson: Boisson) {
+        database.boissonDao().deleteBoisson(boisson)
+    }
+
     fun updateBoisson(boisson: Boisson) {
         coroutineScope.launch {
             database.boissonDao().updateBoisson(boisson)

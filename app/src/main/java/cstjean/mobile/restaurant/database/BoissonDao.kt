@@ -1,6 +1,7 @@
 package cstjean.mobile.restaurant.database
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Query
 import cstjean.mobile.restaurant.boisson.Boisson
 import java.util.UUID
@@ -20,4 +21,8 @@ interface BoissonDao {
 
     @Update
     suspend fun updateBoisson(boisson: Boisson)
+
+    @Delete
+    suspend fun deleteBoisson(boisson: Boisson)
+
 }

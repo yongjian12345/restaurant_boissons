@@ -13,4 +13,5 @@
     <string name="boisson_image_label">Image</string>
     <string name="boisson_ajouter_image">Ajouter une image</string>
     <string name="filtrer">filtrer</string>
+    <string name="supprimer">supprimer</string>
 </resources>

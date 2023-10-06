@@ -1,5 +1,6 @@
 package cstjean.mobile.restaurant
 
+import android.app.AlertDialog
 import android.R as U
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -51,13 +52,8 @@ class BoissonFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.TakePicture()) { photoPrise: Boolean ->
             if (photoPrise && photoFilename != null) {
                 boissonViewModel.updateBoisson { oldBoisson ->
-                    if (oldBoisson.photoFilename != null) {
-                        val photoFichier = File(
-                            requireContext().applicationContext.filesDir,
-                            oldBoisson.photoFilename
-                        )
-                        photoFichier.delete()
-                    }
+
+                    deletePhoto(oldBoisson.photoFilename)
                     oldBoisson.copy(photoFilename = photoFilename)
                 }
             }
@@ -105,7 +101,6 @@ class BoissonFragment : Fragment() {
             }
         }
         binding.apply {
-
 
             val items = Produit.values().map { it.toString() }.toTypedArray()
             val adapter = ArrayAdapter(requireContext(), U.layout.simple_spinner_dropdown_item, items)
@@ -165,7 +160,41 @@ class BoissonFragment : Fragment() {
         }
     }
 
+    private fun deletePhoto(photoFilename: String?) {
+        if (photoFilename != null) {
+            val photoFichier = File(
+                requireContext().applicationContext.filesDir,
+                photoFilename
+            )
+            photoFichier.delete()
+        }
+    }
+
+    private fun showDeleteConfirmationDialog(photoFilename: String?) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.apply {
+            setTitle("Confirmation")
+            setMessage("Voulez-vous vraiment supprimer cet élément ?")
+            setPositiveButton("Oui") { _, _ ->
+                deletePhoto(photoFilename)
+
+
+                /*val boissonToDelete = ... // Récupérez l'objet Boisson que vous souhaitez supprimer
+                BoissonRepository.get().deleteBoisson(boissonToDelete)*/
+
+
+            }
+            setNegativeButton("Non", null)
+        }
+        builder.create().show()
+    }
+
+
     private fun updatePhoto(photoFilename: String?) {
+
+        binding.btnSupprimer.setOnClickListener {
+            showDeleteConfirmationDialog(photoFilename)
+        }
 
         if (binding.boissonPhoto.tag != photoFilename) {
 
@@ -182,6 +211,8 @@ class BoissonFragment : Fragment() {
                     binding.boissonPhoto.setImageBitmap(scaledBitmap)
                     binding.boissonPhoto.scaleType = ImageView.ScaleType.FIT_XY
                     binding.boissonPhoto.tag = photoFilename
+
+
                 }
             }
         }
@@ -206,19 +237,14 @@ class BoissonFragment : Fragment() {
             if (boissonProducteur.text.toString() != boisson.producteur) {
                 boissonProducteur.setText(boisson.producteur)
             }
-            /*
-            if (boissonImage.text.toString() != boisson.photoFilename) {
-                boissonImage.setText(boisson.photoFilename)
-            }*/
+
             updatePhoto(boisson.photoFilename)
 
             val items = Produit.values().map { it.toString() }.toTypedArray()
             val currentTypeProduit = boisson.typeProduit.toString()
 
-            // Trouvez l'index de cet élément dans votre tableau
             val defaultPosition = items.indexOf(currentTypeProduit)
 
-            // Définissez cet index comme élément sélectionné dans le Spinner
             typeBoisson.setSelection(defaultPosition)
         }
     }
