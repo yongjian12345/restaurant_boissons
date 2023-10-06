@@ -18,7 +18,7 @@ private const val TAG = "BoissonsListViewModel"
  *
  * @property boissons La liste des travaux.
  *
- * @author Gabriel T. St-Hilaire
+ * @author
  */
 class BoissonsListViewModel : ViewModel() {
     private val boissonRepository = BoissonRepository.get()

@@ -79,7 +79,7 @@ class BoissonFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentBoissonBinding.inflate(inflater, container, false)
 
         return binding.root
@@ -158,12 +158,6 @@ class BoissonFragment : Fragment() {
                 }
             }
 
-            /*
-            boissonImage.doOnTextChanged { text, _, _, _ ->
-                boissonViewModel.updateBoisson { oldBoisson ->
-                    oldBoisson.copy(photoFilename = text.toString())
-                }
-            }*/
 
         }
     }
