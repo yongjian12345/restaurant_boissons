@@ -18,6 +18,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import cstjean.mobile.restaurant.boisson.Boisson
 import kotlinx.coroutines.launch
 import java.util.UUID
@@ -55,7 +56,8 @@ class BoissonsListFragment : Fragment() {
     ): View {
         _binding = FragmentBoissonsListBinding.inflate(inflater, container, false)
 
-        binding.boissonsRecyclerView.layoutManager = LinearLayoutManager(context)
+        
+        binding.boissonsRecyclerView.layoutManager = GridLayoutManager(context, 2)
 
 
         return binding.root

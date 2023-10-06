@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#B35FC9F3"/> <!-- Couleur de fond par défaut, vous pouvez la changer -->
+    <corners android:radius="12dp"/> <!-- Définit le rayon d'arrondissement des coins -->
+</shape>

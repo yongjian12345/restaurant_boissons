@@ -69,7 +69,7 @@ class BoissonHolder(private val binding: ListItemBoissonBinding) :
             }
         } else {
             binding.boissonPhoto.setImageResource(R.drawable.photo)
-            binding.boissonPhoto.scaleType = ImageView.ScaleType.FIT_XY
+
             binding.boissonPhoto.tag = "default"
         }
     }
