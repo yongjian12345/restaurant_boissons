@@ -55,7 +55,6 @@ class BoissonHolder(private val binding: ListItemBoissonBinding) :
         }
         if (binding.boissonPhoto.tag != boisson.photoFilename) {
             if (photoFichier?.exists() == true) {
-                Log.d("MonTag", "2")
                 binding.boissonPhoto.doOnLayout { view ->
                     val scaledBitmap = getScaledBitmap(
                         photoFichier.path,
@@ -88,6 +87,21 @@ class BoissonsListAdapter(
     private val onBoissonClicked: (boissonId : UUID) -> Unit) :
     RecyclerView.Adapter<BoissonHolder>() {
 
+
+    private var filteredBoissons: List<Boisson> = boissons
+
+    fun filter(query: String) {
+        filteredBoissons = if (query.isEmpty()) {
+            boissons
+        } else {
+            boissons.filter {
+                it.nom.contains(query, ignoreCase = true)
+            }
+        }
+        notifyDataSetChanged()
+    }
+
+
     /**
      * Lors de la création des ViewHolder.
      *
@@ -111,14 +125,15 @@ class BoissonsListAdapter(
      * @param position La position dans la liste qu'on souhaite utiliser.
      */
     override fun onBindViewHolder(holder: BoissonHolder, position: Int) {
-        val boisson = boissons[position]
+        val boisson = filteredBoissons[position]
         holder.bind(boisson, onBoissonClicked)
     }
+
 
     /**
      * Récupère le nombre total d'item de notre liste.
      *
      * @return Le nombre d'item total de notre liste.
      */
-    override fun getItemCount() = boissons.size
+    override fun getItemCount() = filteredBoissons.size
 }
