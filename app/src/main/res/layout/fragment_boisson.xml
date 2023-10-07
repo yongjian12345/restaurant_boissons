@@ -17,7 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/boisson_nom_hint"
-        android:inputType="text" />
+        android:inputType="text"
+        android:autofillHints="nom" />
 
     <TextView
         style="?android:listSeparatorTextViewStyle"
@@ -43,7 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/boisson_pays_hint"
-        android:inputType="text" />
+        android:inputType="text"
+        android:autofillHints="pays" />
 
     <TextView
         style="?android:listSeparatorTextViewStyle"
@@ -56,34 +58,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/boisson_producteur_hint"
-        android:inputType="text" />
+        android:inputType="text"
+        android:autofillHints="producteur" />
 
-    <TextView
-        style="?android:listSeparatorTextViewStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/boisson_image_label" />
-
-    <EditText
-        android:id="@+id/boisson_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/boisson_image_hint"
-        android:inputType="text" />
     <ImageView
         android:id="@+id/boisson_photo"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:cropToPadding="true"
         android:scaleType="centerInside"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/visuel_boisson" />
 
     <ImageButton
         android:id="@+id/boisson_Camera"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/baseline_photo_camera_24" />
+        android:src="@drawable/baseline_photo_camera_24"
+        android:contentDescription="@string/prendre_une_photo" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -92,12 +85,13 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/btn_partager"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="16dp"
-            android:text="Bouton 1" />
+            android:text="@string/partager"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
             android:id="@+id/btn_supprimer"
@@ -105,7 +99,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="16dp"
-            android:text="@string/supprimer" />
+            android:text="@string/supprimer"
+            style="?android:attr/buttonBarButtonStyle" />
 
     </LinearLayout>
 

@@ -14,4 +14,8 @@
     <string name="boisson_ajouter_image">Ajouter une image</string>
     <string name="filtrer">filtrer</string>
     <string name="supprimer">supprimer</string>
+    <string name="prendre_une_photo">prendre une photo</string>
+    <string name="visuel_boisson">visuel boisson</string>
+    <string name="partager">Partager</string>
+    <string name="boisson_partager">Boisson %1$s</string>
 </resources>
