@@ -2,17 +2,13 @@ package cstjean.mobile.restaurant
 
 import android.widget.ImageView
 
-import android.graphics.BitmapFactory
-import android.util.Log
+
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.doOnLayout
 import androidx.recyclerview.widget.RecyclerView
 import cstjean.mobile.restaurant.databinding.ListItemBoissonBinding
 import cstjean.mobile.restaurant.boisson.Boisson
-import cstjean.mobile.restaurant.boisson.TypeBoisson
 import java.io.File
 import java.util.UUID
 
@@ -33,7 +29,6 @@ class BoissonHolder(private val binding: ListItemBoissonBinding) :
      */
     fun bind(boisson: Boisson, onBoissonClicked: (boissonId : UUID) -> Unit) {
         binding.boissonNom.text = boisson.nom
-
         binding.boissonPaysOrigine.text = boisson.paysOrigin
         binding.boissonProducteur.text = boisson.producteur
 
@@ -53,6 +48,7 @@ class BoissonHolder(private val binding: ListItemBoissonBinding) :
         val photoFichier = boisson.photoFilename?.let {
             File(context.filesDir, it)
         }
+
         if (binding.boissonPhoto.tag != boisson.photoFilename) {
             if (photoFichier?.exists() == true) {
                 binding.boissonPhoto.doOnLayout { view ->

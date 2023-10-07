@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +27,8 @@ import cstjean.mobile.restaurant.boisson.Boisson
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.Date
+import androidx.navigation.fragment.findNavController
+
 
 
 
@@ -38,6 +39,8 @@ import java.util.Date
  */
 class BoissonFragment : Fragment() {
     private var _binding: FragmentBoissonBinding? = null
+
+    private val boissonRepository = BoissonRepository.get()
     private val binding
         get() = checkNotNull(_binding) {
             "Binding est null. La vue est visible ??"
@@ -170,31 +173,29 @@ class BoissonFragment : Fragment() {
         }
     }
 
-    private fun showDeleteConfirmationDialog(photoFilename: String?) {
+    private fun showDeleteConfirmationDialog(photoFilename: String?, boisson: Boisson) {
         val builder = AlertDialog.Builder(requireContext())
         builder.apply {
             setTitle("Confirmation")
             setMessage("Voulez-vous vraiment supprimer cet élément ?")
             setPositiveButton("Oui") { _, _ ->
+
                 deletePhoto(photoFilename)
-
-
-                /*val boissonToDelete = ... // Récupérez l'objet Boisson que vous souhaitez supprimer
-                BoissonRepository.get().deleteBoisson(boissonToDelete)*/
-
-
+                viewLifecycleOwner.lifecycleScope.launch {
+                    deleteBoisson(boisson)
+                }
+                findNavController().popBackStack()
             }
             setNegativeButton("Non", null)
         }
         builder.create().show()
     }
 
+    suspend fun deleteBoisson(boisson: Boisson) {
+        boissonRepository.deleteBoisson(boisson)
+    }
 
     private fun updatePhoto(photoFilename: String?) {
-
-        binding.btnSupprimer.setOnClickListener {
-            showDeleteConfirmationDialog(photoFilename)
-        }
 
         if (binding.boissonPhoto.tag != photoFilename) {
 
@@ -217,7 +218,6 @@ class BoissonFragment : Fragment() {
             }
         }
         else {
-
             binding.boissonPhoto.setImageResource(R.drawable.photo)
             binding.boissonPhoto.scaleType = ImageView.ScaleType.FIT_XY
             binding.boissonPhoto.tag = "default"
@@ -226,6 +226,10 @@ class BoissonFragment : Fragment() {
 
     private fun updateUi(boisson: Boisson) {
         binding.apply {
+
+            binding.btnSupprimer.setOnClickListener {
+                showDeleteConfirmationDialog(photoFilename, boisson)
+            }
             // Pour éviter une loop infinie avec le update
             if (boissonNom.text.toString() != boisson.nom) {
                 boissonNom.setText(boisson.nom)
