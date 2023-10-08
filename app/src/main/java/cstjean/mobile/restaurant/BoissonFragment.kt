@@ -212,7 +212,7 @@ class BoissonFragment : Fragment() {
      * Met à jour la photo.
      */
     private fun updatePhoto(photoFilename: String?) {
-        
+
         if (binding.boissonPhoto.tag != photoFilename) {
 
             val photoFichier = photoFilename?.let {
