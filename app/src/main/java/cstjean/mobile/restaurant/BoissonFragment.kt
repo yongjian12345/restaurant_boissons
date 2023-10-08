@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -238,6 +237,21 @@ class BoissonFragment : Fragment() {
         }
     }
 
+    private fun createInstagramIntent(type: String, uri: Uri, sujetMessage: String = "") {
+
+        // Create the new Intent using the 'Send' action.
+        val share = Intent(Intent.ACTION_SEND)
+
+        // Set the MIME type
+        share.type = type
+
+        // Add the URI to the Intent.
+        share.putExtra(Intent.EXTRA_STREAM, uri)
+        share.putExtra(Intent.EXTRA_SUBJECT, sujetMessage)
+        // Broadcast the Intent.
+        startActivity(Intent.createChooser(share, "Share to"))
+    }
+//---------------------------------------------------------------------------------------------
     /**
      * Met à jour l'interface.
      */
@@ -248,8 +262,17 @@ class BoissonFragment : Fragment() {
                 binding.btnPartager.visibility = View.VISIBLE
                 binding.btnPartager.setOnClickListener {
                     val f: File = File(requireContext().applicationContext.filesDir, boisson.photoFilename)
-                    val intent = Intent(Intent.ACTION_SEND)
-                    intent.setData(Uri.parse("mailto:"))
+                    val uri = FileProvider.getUriForFile(
+                        requireContext(),
+                        "cstjean.mobile.fileprovider",
+                        f
+                    )
+                    val sujetMessage = getString(R.string.boisson_partager, boisson.nom)
+
+
+                    createInstagramIntent("image/*", uri, sujetMessage)
+                    /*val intent = Intent(Intent.ACTION_SEND)
+                    //intent.setData(Uri.parse("mailto:"))
                         intent.apply {
                         val sujetMessage = getString(R.string.boisson_partager, boisson.nom)
                             type = "application/image";
@@ -260,9 +283,9 @@ class BoissonFragment : Fragment() {
                             )
                             putExtra(Intent.EXTRA_STREAM, uri)
                             putExtra(Intent.EXTRA_SUBJECT, sujetMessage)
-                    }
+                    }*/
 
-                    startActivity(intent)
+                    //startActivity(intent)
                 }
             }
 
