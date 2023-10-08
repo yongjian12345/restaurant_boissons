@@ -233,7 +233,6 @@ class BoissonFragment : Fragment() {
                     intent.setData(Uri.parse("mailto:"))
                         intent.apply {
                         val sujetMessage = getString(R.string.boisson_partager, boisson.nom)
-                       // type = "text/plain"
                             type = "application/image";
                             val uri = FileProvider.getUriForFile(
                                 requireContext(),
@@ -241,7 +240,6 @@ class BoissonFragment : Fragment() {
                                 f
                             )
                             putExtra(Intent.EXTRA_STREAM, uri)
-                            putExtra(Intent.EXTRA_TEXT, "test")
                             putExtra(Intent.EXTRA_SUBJECT, sujetMessage)
                     }
 
