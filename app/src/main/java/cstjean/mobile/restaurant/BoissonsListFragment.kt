@@ -73,7 +73,7 @@ class BoissonsListFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 boissonsListViewModel.boissons.collect { boissons ->
                     val adapter = BoissonsListAdapter(boissons) { boissonId ->
-                        Log.d(TAG, boissonId.toString())
+
                         findNavController().navigate(
                             BoissonsListFragmentDirections.showBoissonDetail(
                                 boissonId

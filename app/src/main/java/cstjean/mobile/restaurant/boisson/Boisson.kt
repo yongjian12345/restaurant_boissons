@@ -3,14 +3,13 @@ package cstjean.mobile.restaurant.boisson
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import cstjean.mobile.restaurant.Produit
-import java.util.Date
 import java.util.UUID
 
 /**
- * Un travail scolaire.
+ * Une boissons.
  *
- * @property id Le ID du travail.
- * @property nom Le nom du travail.
+ * @property id Le ID de la boisson.
+ * @property nom Le nom de la boisson.
  * @property dateRemise La date de remise du travail.
  * @property estTermine Si le travail est terminé.
  *

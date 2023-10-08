@@ -227,15 +227,20 @@ class BoissonFragment : Fragment() {
     private fun updateUi(boisson: Boisson) {
         binding.apply {
 
-            binding.btnPartager.setOnClickListener {
-                val intent = Intent(Intent.ACTION_SEND).apply {
-                    val sujetMessage = getString(R.string.boisson_partager, boisson.nom)
-                    type = "text/plain"
-                    putExtra(Intent.EXTRA_SUBJECT, sujetMessage)
-                }
+            if (boisson.photoFilename != null) {
+                binding.btnPartager.visibility = View.VISIBLE
+                binding.btnPartager.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_SEND).apply {
+                        val sujetMessage = getString(R.string.boisson_partager, boisson.nom)
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_TEXT, "test")
+                        putExtra(Intent.EXTRA_SUBJECT, sujetMessage)
+                    }
 
-                startActivity(intent)
+                    startActivity(intent)
+                }
             }
+
 
             binding.btnSupprimer.setOnClickListener {
                 showDeleteConfirmationDialog(photoFilename, boisson)
