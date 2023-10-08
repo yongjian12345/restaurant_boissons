@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -213,6 +214,7 @@ class BoissonFragment : Fragment() {
      */
     private fun updatePhoto(photoFilename: String?) {
 
+        Log.d("test", (binding.boissonPhoto.tag != photoFilename).toString())
         if (binding.boissonPhoto.tag != photoFilename) {
 
             val photoFichier = photoFilename?.let {
@@ -227,7 +229,7 @@ class BoissonFragment : Fragment() {
                     )
                     binding.boissonPhoto.setImageBitmap(scaledBitmap)
                     binding.boissonPhoto.scaleType = ImageView.ScaleType.FIT_XY
-                    binding.boissonPhoto.tag = photoFilename
+
 
 
                 }
