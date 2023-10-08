@@ -18,4 +18,6 @@
     <string name="visuel_boisson">visuel boisson</string>
     <string name="partager">Partager</string>
     <string name="boisson_partager">Boisson %1$s</string>
+    <string name="boisson_partager_sujet">Message pour la boisson %1$s</string>
+    <string name="boisson_partager_message">Wow La boisson.</string>
 </resources>
