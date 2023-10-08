@@ -17,15 +17,15 @@ import java.util.UUID
  *
  * @property binding Binding de la vue pour une cellule.
  *
- * @author Gabriel T. St-Hilaire
+ * @author Raphael ostiguy & Yong Jian Qiu
  */
 class BoissonHolder(private val binding: ListItemBoissonBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     /**
-     * On associe un travail à ce ViewHolder.
+     * On associe une boisson à ce ViewHolder.
      *
-     * @param boisson Le travail associé.
+     * @param boisson La boisson associé.
      */
     fun bind(boisson: Boisson, onBoissonClicked: (boissonId : UUID) -> Unit) {
         binding.boissonNom.text = boisson.nom
@@ -72,11 +72,11 @@ class BoissonHolder(private val binding: ListItemBoissonBinding) :
 
 
 /**
- * Adapter pour notre RecyclerView de travaux.
+ * Adapter pour notre RecyclerView de boissons.
  *
- * @property boissons Liste des travaux à afficher.
+ * @property boissons Liste des boissons à afficher.
  *
- * @author Gabriel T. St-Hilaire
+ * @author Raphael ostiguy & Yong Jian Qiu
  */
 class BoissonsListAdapter(
     private val boissons: List<Boisson>,

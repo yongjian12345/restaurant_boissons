@@ -33,9 +33,9 @@ import androidx.navigation.fragment.findNavController
 
 
 /**
- * Fragment pour la gestion d'un travail.
+ * Fragment pour la gestion d'une boisson.
  *
- * @author Gabriel T. St-Hilaire
+ * @author Raphael ostiguy & Yong Jian Qiu
  */
 class BoissonFragment : Fragment() {
     private var _binding: FragmentBoissonBinding? = null
@@ -46,11 +46,17 @@ class BoissonFragment : Fragment() {
             "Binding est null. La vue est visible ??"
         }
 
+    /**
+     * Vérifie si l'intent peut être résolu.
+     */
     private fun canResolveIntent(intent: Intent): Boolean {
         val packageManager: PackageManager = requireActivity().packageManager
         return intent.resolveActivity(packageManager) != null
     }
 
+    /**
+     * Lorsque la photo est prise l'ascien est effacer et le nouveau est sauvegarder.
+     */
     private val prendrePhoto =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { photoPrise: Boolean ->
             if (photoPrise && photoFilename != null) {
@@ -163,6 +169,9 @@ class BoissonFragment : Fragment() {
         }
     }
 
+    /**
+     * Supprime la photo sur l'appareil.
+     */
     private fun deletePhoto(photoFilename: String?) {
         if (photoFilename != null) {
             val photoFichier = File(
@@ -173,6 +182,9 @@ class BoissonFragment : Fragment() {
         }
     }
 
+    /**
+     * Modal de validation pour supprimer.
+     */
     private fun showDeleteConfirmationDialog(photoFilename: String?, boisson: Boisson) {
         val builder = AlertDialog.Builder(requireContext())
         builder.apply {
@@ -191,10 +203,16 @@ class BoissonFragment : Fragment() {
         builder.create().show()
     }
 
+    /**
+     *  Supprime la boisson en bd.
+     */
     suspend fun deleteBoisson(boisson: Boisson) {
         boissonRepository.deleteBoisson(boisson)
     }
 
+    /**
+     * Met à jour la photo.
+     */
     private fun updatePhoto(photoFilename: String?) {
 
         if (binding.boissonPhoto.tag != photoFilename) {
@@ -224,6 +242,9 @@ class BoissonFragment : Fragment() {
         }
     }
 
+    /**
+     * Met à jour l'interface.
+     */
     private fun updateUi(boisson: Boisson) {
         binding.apply {
 
@@ -245,7 +266,7 @@ class BoissonFragment : Fragment() {
             binding.btnSupprimer.setOnClickListener {
                 showDeleteConfirmationDialog(photoFilename, boisson)
             }
-            // Pour éviter une loop infinie avec le update
+
             if (boissonNom.text.toString() != boisson.nom) {
                 boissonNom.setText(boisson.nom)
             }

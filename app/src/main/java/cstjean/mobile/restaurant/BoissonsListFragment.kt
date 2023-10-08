@@ -3,7 +3,6 @@ package cstjean.mobile.restaurant
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -15,24 +14,20 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import cstjean.mobile.restaurant.databinding.FragmentBoissonsListBinding
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import cstjean.mobile.restaurant.boisson.Boisson
 import kotlinx.coroutines.launch
 import java.util.UUID
 
-private const val TAG = "BoissonsListFragment"
-
 /**
- * Fragment pour la liste des travaux.
+ * Fragment pour la liste des boissons.
  *
- * @author Gabriel T. St-Hilaire
+ * @author Raphael ostiguy & Yong Jian Qiu
  */
 class BoissonsListFragment : Fragment() {
     private var _binding: FragmentBoissonsListBinding? = null
@@ -66,6 +61,10 @@ class BoissonsListFragment : Fragment() {
 
         return binding.root
     }
+
+    /**
+     * Lorsque la vue est créée.
+     */
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

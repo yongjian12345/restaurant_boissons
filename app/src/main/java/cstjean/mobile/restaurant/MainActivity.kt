@@ -6,7 +6,7 @@ import android.os.Bundle
 /**
  * Activity qui contient un seul Fragment.
  *
- * @author Gabriel T. St-Hilaire
+ * @author Raphael ostiguy & Yong Jian Qiu
  */
 class MainActivity : AppCompatActivity() {
 

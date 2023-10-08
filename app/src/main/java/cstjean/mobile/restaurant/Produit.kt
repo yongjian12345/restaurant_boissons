@@ -1,5 +1,9 @@
 package cstjean.mobile.restaurant
 
+/**
+ * Les differants type de boisson
+ * @property nom Le nom du produit
+ */
 enum class Produit ( val nom: String){
     Vin("Vin"),
     Spiritueux("Spiritueux"),

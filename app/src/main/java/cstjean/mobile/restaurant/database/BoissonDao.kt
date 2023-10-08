@@ -9,6 +9,9 @@ import androidx.room.Insert
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Data access object pour les boissons.
+ */
 @Dao
 interface BoissonDao {
     @Query("SELECT * FROM boisson")
@@ -24,5 +27,4 @@ interface BoissonDao {
 
     @Delete
     suspend fun deleteBoisson(boisson: Boisson)
-
 }

@@ -5,13 +5,24 @@ import androidx.room.Room
 import cstjean.mobile.restaurant.database.BoissonDatabase
 import cstjean.mobile.restaurant.boisson.Boisson
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import java.util.UUID
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 private const val DATABASE_NAME = "boisson-database"
-class BoissonRepository private constructor(
+
+/**
+ * Repository pour les boissons.
+ *
+ * @property context Le contexte de l'application.
+ * @property coroutineScope Le scope pour les coroutines.
+ *
+ * @author Raphael ostiguy & Yong Jian Qiu
+ */
+class BoissonRepository @OptIn(DelicateCoroutinesApi::class)
+private constructor(
     context: Context,
     private val coroutineScope: CoroutineScope = GlobalScope
 ){

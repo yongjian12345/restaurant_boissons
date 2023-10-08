@@ -10,11 +10,13 @@ import java.util.UUID
  *
  * @property id Le ID de la boisson.
  * @property nom Le nom de la boisson.
- * @property dateRemise La date de remise du travail.
- * @property estTermine Si le travail est terminé.
+ * @property typeProduit Le type de produit de la boisson.
+ * @property paysOrigin Le pays d'origine de la boisson.
+ * @property producteur Le producteur de la boisson.
  *
- * @author Gabriel T. St-Hilaire
+ * @author Raphael Ostiguy & Yong Jian Qiu
  */
+
 @Entity
 data class Boisson(
     @PrimaryKey val id: UUID,

@@ -10,6 +10,9 @@ import java.util.UUID
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.flow.update
 
+/**
+ * ViewModel pour la liste des boissons.
+ */
 class BoissonViewModel(boissonId: UUID) : ViewModel() {
     private val boissonRepository = BoissonRepository.get()
     private val _boisson: MutableStateFlow<Boisson?> = MutableStateFlow(null)
