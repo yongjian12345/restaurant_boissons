@@ -1,7 +1,6 @@
 package cstjean.mobile.restaurant
 
 import android.app.AlertDialog
-import android.R as U
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -21,15 +20,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import cstjean.mobile.restaurant.databinding.FragmentBoissonBinding
 import cstjean.mobile.restaurant.boisson.Boisson
+import cstjean.mobile.restaurant.databinding.FragmentBoissonBinding
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.Date
-import androidx.navigation.fragment.findNavController
-
-
+import android.R as U
 
 
 /**
@@ -251,13 +249,19 @@ class BoissonFragment : Fragment() {
             if (boisson.photoFilename != null) {
                 binding.btnPartager.visibility = View.VISIBLE
                 binding.btnPartager.setOnClickListener {
+                    val f: File = File(requireContext().applicationContext.filesDir, boisson.photoFilename)
                     val intent = Intent(Intent.ACTION_SEND)
                     intent.setData(Uri.parse("mailto:"))
                         intent.apply {
                         val sujetMessage = getString(R.string.boisson_partager, boisson.nom)
-                        type = "text/plain"
-                        putExtra(Intent.EXTRA_TEXT, "test")
-                        putExtra(Intent.EXTRA_SUBJECT, sujetMessage)
+                            type = "application/image";
+                            val uri = FileProvider.getUriForFile(
+                                requireContext(),
+                                "cstjean.mobile.fileprovider",
+                                f
+                            )
+                            putExtra(Intent.EXTRA_STREAM, uri)
+                            putExtra(Intent.EXTRA_SUBJECT, sujetMessage)
                     }
 
                     startActivity(intent)
