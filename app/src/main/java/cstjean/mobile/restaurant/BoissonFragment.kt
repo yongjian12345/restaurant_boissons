@@ -213,8 +213,7 @@ class BoissonFragment : Fragment() {
      * Met à jour la photo.
      */
     private fun updatePhoto(photoFilename: String?) {
-
-        Log.d("test", (binding.boissonPhoto.tag != photoFilename).toString())
+        
         if (binding.boissonPhoto.tag != photoFilename) {
 
             val photoFichier = photoFilename?.let {
@@ -229,9 +228,6 @@ class BoissonFragment : Fragment() {
                     )
                     binding.boissonPhoto.setImageBitmap(scaledBitmap)
                     binding.boissonPhoto.scaleType = ImageView.ScaleType.FIT_XY
-
-
-
                 }
             }
         }
