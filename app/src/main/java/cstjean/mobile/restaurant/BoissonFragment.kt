@@ -230,7 +230,9 @@ class BoissonFragment : Fragment() {
             if (boisson.photoFilename != null) {
                 binding.btnPartager.visibility = View.VISIBLE
                 binding.btnPartager.setOnClickListener {
-                    val intent = Intent(Intent.ACTION_SEND).apply {
+                    val intent = Intent(Intent.ACTION_SEND)
+                    intent.setData(Uri.parse("mailto:"))
+                        intent.apply {
                         val sujetMessage = getString(R.string.boisson_partager, boisson.nom)
                         type = "text/plain"
                         putExtra(Intent.EXTRA_TEXT, "test")
